@@ -1,0 +1,55 @@
+---
+title: "Predicting Mortality in Heart Failure Patients"
+author: "DSCI 522 Group 41"
+format: html
+jupyter: python3
+---
+
+# Summary
+
+Write one paragraph summarizing the research question, findings, significance, and limitations.
+
+# Introduction
+
+## Background
+
+Introduce heart failure and explain why predicting mortality is important. 
+
+## Research Question
+
+Can we predict mortality among heart failure patients using their clinical characteristics?
+
+## Dataset Description
+
+Describe the Heart Failure Clinical Records dataset, its source, observations, predictors, and target variable.
+
+# Methods
+
+## Data Import and Preparation
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+```{python}
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00519/heart_failure_clinical_records_dataset.csv"
+
+df = pd.read_csv(url)
+
+df.head()
+
+```
+
+## Exploratory Data Analysis
+
+## Model Development
+
+## Model Evaluation
+
+# Results
+
+# Discussion
+
+# References
