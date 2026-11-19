@@ -13,15 +13,21 @@ Write one paragraph summarizing the research question, findings, significance, a
 
 ## Background
 
-Introduce heart failure and explain why predicting mortality is important. 
+Heart failure is a chronic condition in which the heart cannot pump enough blood to meet the body’s needs, reducing the flow of blood and oxygen to the body and vital organs. This occurs when the heart becomes weakened, stiff, or damaged [@cardiacbc]. The most common cause is damage to the heart muscle from a heart attack or from blocked arteries around the heart; other causes include high blood pressure, heart valve problems, and congenital heart disease [@cardiacbc]. Heart failure currently has no cure; instead, it is managed by monitoring symptoms and weight, limiting sodium and fluid intake, controlling blood pressure, and taking medication [@cardiacbc].
+
+There is no single test that diagnoses heart failure; clinicians commonly rely on a combination of blood tests, echocardiograms, chest X-rays, and electrocardiograms [@cardiacbc]. One key measurement is the ejection fraction (EF), the percentage of blood the heart pumps out with each contraction. A normal EF is about 60%, and patients with an EF of 40% or lower are classified as having heart failure with reduced ejection fraction [@bcguidelines2023]. Blood tests also provide useful information: serum creatinine reflects how well the kidneys are working, serum sodium measures the sodium level in the blood, creatinine phosphokinase (CPK) is an enzyme released when muscle tissue is damaged, and anaemia indicates a low level of red blood cells or hemoglobin [@uci2020]. Previous studies using this data set found that age, kidney function, blood pressure, ejection fraction, and anaemia were significant risk factors for mortality [@ahmad2017], and that serum creatinine and ejection fraction alone could predict survival well [@chicco2020].
+
+Heart failure is a significant health burden in British Columbia, where about 2% of the population, roughly 137,082 people, were living with diagnosed heart failure in 2020/21, with 18,512 new cases that year (BC Ministry of Health, 2023). As the number of people living with heart failure grows, clinicians need ways to identify which diagnosed patients are at the greatest risk of death. A model that predicts mortality from routinely collected clinical measurements could help prioritize these patients for closer follow-up, faster optimization of guideline-directed medical therapy, and timely referral for advanced treatments. This matters because guideline-directed therapy can extend life by several years, but its benefits take months to appear as doses are gradually increased [@cardiacbc].
 
 ## Research Question
 
-Can we predict mortality among heart failure patients using their clinical characteristics?
+The purpose of this project is to answer the following question: can we predict whether a patient with heart failure will die during the follow-up period using their clinical characteristics (such as age, ejection fraction, serum creatinine, and serum sodium)? 
 
 ## Dataset Description
 
-Describe the Heart Failure Clinical Records dataset, its source, observations, predictors, and target variable.
+The data set used in this report is the Heart Failure Clinical Records data set from the UCI Machine Learning Repository [@uci2020], originally collected by Ahmad [@ahmad2017]. It contains the medical records of 299 patients admitted to the Institute of Cardiology and Allied Hospital in Faisalabad, Pakistan, between April and December 2015. All patients were aged 40 or older, had left ventricular systolic dysfunction, and were classified as New York Heart Association (NYHA) class III or IV [@ahmad2017]. The NYHA classification grades heart failure severity from class I (no limitation of physical activity) to class IV (symptoms at rest), so classes III and IV represent patients with advanced disease. [@aha_nyha]
+
+Each row represents one patient. The available variables are age, anaemia, creatinine phosphokinase (CPK), diabetes, ejection fraction, high blood pressure, platelets, serum creatinine, serum sodium, sex, smoking status, and follow-up time. The target variable is whether the patient died during the follow-up period (death event), coded as 1 if the patient died and 0 otherwise. Follow-up time is excluded as a predictor because it is directly linked to the outcome: patients who died early necessarily have shorter follow-up times, so including it would leak information about the target. This question can be addressed with this data set because it contains a clearly defined binary outcome and clinical measurements that are routinely collected in practice. However, because the data come from 299 patients with advanced heart failure at a single hospital, the results may not generalize to patients with milder disease or to other populations.
 
 # Methods
 
