@@ -53,8 +53,7 @@ run the Python code. On macOS, `.venv` is hidden in Finder; press
 Do not install packages with `pip install` (or with your editor's "install
 package" prompt). With the Python that uv manages, pip fails with an
 "externally managed environment" error, and packages installed that way are
-not recorded for the rest of the team. See
-[Adding or removing packages](#adding-or-removing-packages) below.
+not recorded for the rest of the team. Use `uv add <package>` instead.
 
 ### 3. Select the project environment in your editor
 
@@ -101,19 +100,6 @@ uv run quarto render analysis/mortality_in_heart_failure_patients.qmd
 activate `.venv` first. The report is saved as a single, self-contained file,
 `analysis/mortality_in_heart_failure_patients.html`. Rendered output is
 ignored by git, so it is not committed.
-
-### Adding or removing packages
-
-Use uv rather than pip, so the change is recorded for everyone:
-
-```bash
-uv add <package>          # a package the analysis uses
-uv add --dev <package>    # a development tool, such as jupyter
-uv remove <package>
-```
-
-Then commit `pyproject.toml` and `uv.lock` together. After pulling changes
-from teammates, run `uv sync` again to update your environment.
 
 ## Dependencies
 
