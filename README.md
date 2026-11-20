@@ -101,6 +101,15 @@ activate `.venv` first. The report is saved as a single, self-contained file,
 `analysis/mortality_in_heart_failure_patients.html`. Rendered output is
 ignored by git, so it is not committed.
 
+To preview the report while you work on it in Positron, open
+`analysis/mortality_in_heart_failure_patients.qmd` and either click the
+**Preview** button at the top of the editor, or open the Command Palette
+(**Cmd + Shift + P** on macOS, **Ctrl + Shift + P** on Windows) and run
+**Quarto: Preview** (shortcut **Cmd + Shift + K** / **Ctrl + Shift + K**). The
+preview opens in Positron's Viewer pane and updates each time you save. Select
+the project environment first (step 3), or the code chunks will run with the
+wrong Python.
+
 ## Dependencies
 
 The project uses [uv](https://docs.astral.sh/uv/) to manage the Python
