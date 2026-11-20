@@ -2,6 +2,7 @@
 title: "Predicting Mortality in Heart Failure Patients"
 author: "DSCI 522 Group 41"
 jupyter: python3
+bibliography: references.bib
 format:
   html:
     embed-resources: true
@@ -311,3 +312,6 @@ These results suggest that clinical measurements provide useful predictive infor
 # Discussion
 
 # References
+
+::: {#refs}
+:::
