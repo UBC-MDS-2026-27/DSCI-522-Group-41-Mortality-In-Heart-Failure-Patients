@@ -130,6 +130,20 @@ print("Testing set:", X_test.shape)
 
 ```
 
+### Saving Processed Data
+
+We save the stratified training and test splits separately, with `DEATH_EVENT` as the outcome and follow-up time excluded. Feature scaling is fitted within the model pipeline during training.
+
+```{python}
+processed_dir = raw_dir.parent / "processed"
+processed_dir.mkdir(parents=True, exist_ok=True)
+
+test_df = X_test.copy()
+test_df["DEATH_EVENT"] = y_test
+
+train_df.to_csv(processed_dir / "train.csv", index=False)
+test_df.to_csv(processed_dir / "test.csv", index=False)
+```
 
 ## Understanding the Patients Demographics
 
@@ -242,6 +256,10 @@ logistic_pred = logistic_model.predict(X_test)
 
 ## Model Evaluation
 We evaluate the Dummy Classifier and Logistic Regression using stratified 5-fold cross-validation on the training data. We compare accuracy, recall, and F1-score to assess their predictive performance.
+
+- **Accuracy** measures the proportion of all predictions that are correct. It gives an overall comparison with the baseline, but the baseline can score reasonably well by always predicting survival because survivors are the majority.
+- **Recall** measures the proportion of observed deaths that the model correctly identifies. Low recall means the model misses many patients who died during follow-up.
+- **F1-score** is the harmonic mean of precision and recall for the death class. It rewards identifying more observed deaths while also accounting for false positives, which reduce precision.
 
 ```{python}
 from sklearn.model_selection import StratifiedKFold, cross_validate
