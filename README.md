@@ -100,8 +100,7 @@ uv run quarto render analysis/mortality_in_heart_failure_patients.qmd
 
 `uv run` runs Quarto inside the project environment, so you do not need to
 activate `.venv` first. The report is saved as a single, self-contained file,
-`analysis/mortality_in_heart_failure_patients.html`. Rendered output is
-ignored by git, so it is not committed.
+`analysis/mortality_in_heart_failure_patients.html`.
 
 To preview the report while you work on it in Positron, open
 `analysis/mortality_in_heart_failure_patients.qmd` and either click the
