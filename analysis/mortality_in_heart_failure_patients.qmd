@@ -56,7 +56,7 @@ raw_dir.mkdir(parents=True, exist_ok=True)
 # Define the file path
 raw_file = raw_dir / "heart_failure_clinical_records_dataset.csv"
 
-# Download and save the raw dataset
+# Download and save the raw dataset if it doesn't exist
 if not raw_file.exists():
     df = pd.read_csv(url)
     df.to_csv(raw_file, index=False)
