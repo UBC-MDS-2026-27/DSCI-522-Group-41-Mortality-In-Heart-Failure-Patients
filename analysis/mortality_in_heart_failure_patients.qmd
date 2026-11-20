@@ -199,10 +199,109 @@ plt.show()
 
 ## Model Development
 
+### Baseline Model
+
+We first use a Dummy Classifier as a baseline to evaluate whether our classification model performs better than simply predicting the majority class.
+
+```{python}
+from sklearn.dummy import DummyClassifier
+
+dummy_model = DummyClassifier(strategy="most_frequent")
+
+dummy_model.fit(X_train, y_train)
+
+dummy_pred = dummy_model.predict(X_test)
+```
+
+
+### Logistic Regression
+
+We use logistic regression to predict mortality outcomes based on clinical measurements. StandardScaler is applied to standardize the features before model training.
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+
+logistic_model = make_pipeline(
+    StandardScaler(),
+    LogisticRegression(max_iter=1000, random_state=522)
+)
+
+logistic_model.fit(X_train, y_train)
+
+logistic_pred = logistic_model.predict(X_test)
+```
+
 ## Model Evaluation
+We evaluate the Dummy Classifier and Logistic Regression using stratified 5-fold cross-validation on the training data. We compare accuracy, recall, and F1-score to assess their predictive performance.
 
+```{python}
+from sklearn.model_selection import StratifiedKFold, cross_validate
+import pandas as pd
+
+cv = StratifiedKFold(
+    n_splits=5,
+    shuffle=True,
+    random_state=522
+)
+
+models = {
+    "Dummy Classifier": dummy_model,
+    "Logistic Regression": logistic_model
+}
+
+results = []
+
+for name, model in models.items():
+    scores = cross_validate(
+        model,
+        X_train,
+        y_train,
+        cv=cv,
+        scoring=["accuracy", "recall", "f1"]
+    )
+
+    results.append({
+        "Model": name,
+        "Accuracy": scores["test_accuracy"].mean(),
+        "Recall": scores["test_recall"].mean(),
+        "F1-score": scores["test_f1"].mean()
+    })
+
+results_df = pd.DataFrame(results)
+
+print(results_df.round(3).to_string(index=False))
+```
+
+### Final Test Evaluation
+
+After comparing the models using cross-validation, we evaluate Logistic Regression on the held-out test set.
+
+```{python}
+from sklearn.metrics import accuracy_score, recall_score, f1_score, confusion_matrix
+
+test_pred = logistic_model.predict(X_test)
+
+print("Test Accuracy:", round(accuracy_score(y_test, test_pred), 3))
+print("Test Recall:", round(recall_score(y_test, test_pred), 3))
+print("Test F1-score:", round(f1_score(y_test, test_pred), 3))
+
+print("\nConfusion Matrix:")
+print(confusion_matrix(y_test, test_pred))
+```
 # Results
+### Classification Results
 
+We compared a Dummy Classifier and Logistic Regression using stratified 5-fold cross-validation on the training set.
+
+Logistic Regression achieved an average accuracy of 74.9%, recall of 44.4%, and F1-score of 0.530, outperforming the Dummy Classifier, which achieved 67.8% accuracy and zero recall and F1-score.
+
+On the held-out test set, Logistic Regression achieved an accuracy of 73.3%, recall of 42.1%, and F1-score of 0.500.
+
+The confusion matrix showed that the model correctly identified 8 of the 19 patients who experienced a death event, while 11 were incorrectly classified as not experiencing a death event.
+
+These results suggest that clinical measurements provide useful predictive information. However, the relatively low recall indicates that the model has limited ability to identify patients who experienced a death event.
 # Discussion
 
 # References
