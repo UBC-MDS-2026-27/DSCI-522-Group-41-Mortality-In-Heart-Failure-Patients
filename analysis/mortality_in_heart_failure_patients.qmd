@@ -1,8 +1,10 @@
 ---
 title: "Predicting Mortality in Heart Failure Patients"
 author: "DSCI 522 Group 41"
-format: html
 jupyter: python3
+format:
+  html:
+    embed-resources: true
 ---
 
 # Summary
