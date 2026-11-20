@@ -463,7 +463,7 @@ wheels = [
 ]
 
 [[package]]
-name = "dsci-522-group-41-student-depression-classifier"
+name = "dsci-522-group-41-mortality-in-heart-failure-patients"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
