@@ -1,27 +1,29 @@
-# Predicting Student Depression Using Demographic, Academic, and Lifestyle Factors
+# Predicting Mortality in Heart Failure Patients from Clinical Records
 
 **Authors:** Linda Arthur, Luis Mario, Yunpeng Xie
 
-**Rendered report:** [View the report](https://ubc-mds-2026-27.github.io/DSCI-522-Group-41-Student-Depression-Classifier-/)
+**Rendered report:** coming soon.
 
 ## Summary
 
-In this project, we ask whether we can predict if a university student reports
-depression from their demographic, academic, social and health characteristics,
-such as age, gender, Cumulative Grade Point Average (CGPA), current semester,
-friend circle, living arrangement and family background. We use the
-[Student Depression Detection Dataset](https://www.kaggle.com/datasets/mkhoirulmustaqim/student-depression-detection-dataset),
-a survey of 4,464 students aged 17 to 28, of whom about 27% report depression.
-We train a logistic regression model to classify each student as reporting
-depression or not, and we evaluate it on a held-out test set using recall and
-F1 score, since failing to identify a student at risk is more costly than a
-false alarm.
+In this project, we ask whether we can predict if a patient with heart failure
+will die during the follow-up period from routinely collected clinical
+measurements, such as age, ejection fraction, serum creatinine, serum sodium,
+blood pressure and anaemia. We use the
+[Heart Failure Clinical Records data set](https://archive.ics.uci.edu/dataset/519/heart+failure+clinical+records)
+from the UCI Machine Learning Repository, which contains the medical records
+of 299 patients with advanced heart failure (NYHA class III or IV) treated at a
+hospital in Faisalabad, Pakistan, in 2015. Of these patients, 96 (about 32%)
+died during follow-up. We exclude follow-up time as a predictor because it is
+directly linked to the outcome and would leak information about the target.
+A model like this could help clinicians identify the patients at greatest risk
+so they can be prioritized for closer follow-up and treatment.
 
-> **Work in progress:** We are currently building and evaluating the model.
-> This section will be updated with our high-level findings and one or two
-> sentences on what they might mean once the analysis is complete. Because the
-> data record self-reported depression rather than a clinical diagnosis, any
-> model we build is intended as a screening aid, not a diagnostic tool.
+> **Work in progress:** We are currently exploring the data and building the
+> model. This section will be updated with our high-level findings once the
+> analysis is complete. Because the data come from 299 patients with advanced
+> disease at a single hospital, our results may not generalize to patients with
+> milder heart failure or to other populations.
 
 ## How to run the analysis
 
