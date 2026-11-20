@@ -82,6 +82,7 @@ df.info()
 
 ```
 
+
 ## Inspect target Variable
 ```{python}
 motaility_percentages=df["DEATH_EVENT"].value_counts(normalize=True)*100
@@ -99,13 +100,37 @@ plt.show()
 
 ```
 
+## Data Splitting
+```{python}
+from sklearn.model_selection import train_test_split
+
+X = df.drop(columns=["DEATH_EVENT", "time"])
+y = df["DEATH_EVENT"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    stratify=y,
+    random_state=522
+)
+
+train_df = X_train.copy()
+train_df["DEATH_EVENT"] = y_train
+
+print("Training set:", X_train.shape)
+print("Testing set:", X_test.shape)
+
+```
+
+
 ## Understanding the Patients Demographics
 
 ## Heart Failure Patients Distribution by Age
 ```{python}
 plt.figure(figsize=(7, 4))
 
-sns.histplot(data=df, x="age", bins=15,color=plot_color)
+sns.histplot(data=train_df, x="age", bins=15,color=plot_color)
 
 plt.title("Age Distribution of Heart Failure Patients")
 plt.xlabel("Age (years)")
@@ -122,7 +147,7 @@ plt.show()
 
 plt.figure(figsize=(7, 4))
 
-sns.countplot(data=df, x="sex",color=plot_color)
+sns.countplot(data=train_df, x="sex",color=plot_color)
 
 plt.title("Distribution of Patients by Sex")
 plt.xlabel("Sex (0 = Female, 1 = Male)")
@@ -138,7 +163,7 @@ plt.show()
 ```{python}
 plt.figure(figsize=(7, 4))
 
-sns.boxplot(data=df, x="DEATH_EVENT", y="age",color=plot_color)
+sns.boxplot(data=train_df, x="DEATH_EVENT", y="age",color=plot_color)
 
 plt.title("Age Distribution by Mortality Outcome")
 plt.xlabel("Mortality Outcome")
@@ -154,7 +179,7 @@ plt.show()
 ## Mortatlity by sex
 ```{python}
 mortality_by_sex = (
-    df.groupby("sex")["DEATH_EVENT"]
+    train_df.groupby("sex")["DEATH_EVENT"]
     .mean()
     .reset_index()
 )
