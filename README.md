@@ -78,14 +78,15 @@ environment, not your global Python.
 
 **JupyterLab:** start it from the project folder with `uv run jupyter lab`.
 
-To check that the right environment is active, run this in the console:
+To check that the environment works, run this in the terminal from the
+project folder:
 
-```python
-import pandas
-print(pandas.__version__)  # should print 3.1.1
+```bash
+uv run python -c "import pandas; print(pandas.__version__)"
 ```
 
-If the interpreter button still says "Global", or `import pandas` fails, the
+It should print `3.1.1`. In your editor, the interpreter button should show the
+project environment rather than "Global"; if it still says "Global", the
 project environment is not selected.
 
 ### 4. Render the report
