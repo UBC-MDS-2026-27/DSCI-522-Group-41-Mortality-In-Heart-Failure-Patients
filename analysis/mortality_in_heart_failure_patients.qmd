@@ -298,7 +298,7 @@ dummy_pred = dummy_model.predict(X_test)
 
 ### Logistic Regression
 
-We use logistic regression to predict mortality outcomes based on clinical measurements. StandardScaler is applied to standardize the features before model training.
+We use logistic regression as a starting point because it is a standard model for predicting binary outcomes, such as mortality, from clinical measurements. We chose a simple model because our training set has only 239 observations, and a more complex model would be more likely to overfit. Finally, StandardScaler is applied to standardize the features before model training.
 
 ```{python}
 from sklearn.linear_model import LogisticRegression
