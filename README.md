@@ -2,7 +2,7 @@
 
 **Authors:** Linda Arthur, Luis Mario, Yunpeng Xie
 
-**Rendered report:** coming soon.
+**Rendered report:** [View the report](https://ubc-mds-2026-27.github.io/DSCI-522-Group-41-Mortality-In-Heart-Failure-Patients/analysis/mortality_in_heart_failure_patients.html)
 
 ## Summary
 
