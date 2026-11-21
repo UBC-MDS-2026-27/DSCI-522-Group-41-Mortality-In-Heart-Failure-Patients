@@ -377,18 +377,44 @@ print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, test_pred))
 ```
 # Results
-### Classification Results
 
-We compared a Dummy Classifier and Logistic Regression using stratified 5-fold cross-validation on the training set.
+## Classification Results
 
-Logistic Regression achieved an average accuracy of 74.9%, recall of 44.4%, and F1-score of 0.530, outperforming the Dummy Classifier, which achieved 67.8% accuracy and zero recall and F1-score.
+```{python}
+#| label: tbl-cv
+#| tbl-cap: "Mean 5-fold cross-validation scores on the training set."
+results_df.round(3)
+```
 
-On the held-out test set, Logistic Regression achieved an accuracy of 73.3%, recall of 42.1%, and F1-score of 0.500.
+```{python}
+#| label: fig-confusion
+#| fig-cap: "Confusion matrix of the logistic regression model on the test set."
+from sklearn.metrics import ConfusionMatrixDisplay
+ConfusionMatrixDisplay.from_predictions(
+    y_test, test_pred, display_labels=["Survived", "Died"], colorbar=False
+)
+plt.xlabel("Predicted outcome")
+plt.ylabel("Actual outcome")
+plt.show()
+```
 
-The confusion matrix showed that the model correctly identified 8 of the 19 patients who experienced a death event, while 11 were incorrectly classified as not experiencing a death event.
+We first compared a baseline Dummy Classifier with Logistic Regression using stratified 5-fold cross-validation on the training set (@tbl-cv). Logistic Regression achieved a mean accuracy of 74.9%, recall of 44.4% and F1-score of 0.530. The Dummy Classifier, which always predicts survival, achieved 67.8% accuracy but a recall and F1-score of zero, because it never identifies a death.
 
-These results suggest that clinical measurements provide useful predictive information. However, the relatively low recall indicates that the model has limited ability to identify patients who experienced a death event.
+On the held-out test set, Logistic Regression achieved an accuracy of 73.3%, recall of 42.1% and F1-score of 0.500. As shown in @fig-confusion, the model correctly identified 8 of the 19 patients who died, but missed the other 11. It also flagged 5 patients who survived as at risk of death, so of the 13 patients the model flagged, 8 actually died. These results suggest that clinical measurements carry some useful information about mortality, but the low recall shows the model misses most patients who died.
+
 # Discussion
+
+Our research question was whether we can predict if a patient with heart failure will die during the follow-up period using their clinical characteristics. Our logistic regression model did better than the baseline model, which always predicts that the patient survives. However, the model is not good enough to answer our question with confidence. On the test set, it had an accuracy of 73.3%, but this is only a little higher than the 67.8% accuracy the baseline got by never predicting a death. More importantly, the recall was 42.1%: the model correctly identified only 8 of the 19 patients who died, and missed the other 11.
+
+In a real clinical setting, missing a patient who later dies is much worse than flagging a patient who survives. A missed patient might not get closer follow-up or changes to their treatment in time. If our model were used to decide which patients need more attention, more than half of the patients at highest risk would be missed. Our exploratory analysis helps explain why. Patients who died were slightly older and more often had high blood pressure, but the two groups overlapped a lot, and the death rate was almost the same for men and women. This means no single measurement clearly separated patients who died from those who survived, which made the prediction difficult.
+
+We expected the model to perform better, because previous studies with this data set found that serum creatinine and ejection fraction can predict survival well [@chicco2020] and identified several significant risk factors [@ahmad2017]. The low recall suggests that a simple logistic regression with the default settings is not enough to capture these relationships, or that our test set was too small to show the model's real performance.
+
+Our analysis has several limitations. The data set is small (299 patients) and comes from a single hospital in Pakistan, and all patients had advanced heart failure (NYHA class III or IV), so our results may not apply to patients with milder disease or to other populations. Our test set had only 19 deaths, so our recall estimate could change a lot with a different split. We used the default classification threshold of 0.5, which is not ideal when missing a death is more costly than a false alarm. We kept the extreme values of creatinine phosphokinase and platelets because they may be real measurements, but they could affect the model. Finally, our model shows associations, not causes: for example, it cannot tell us that high blood pressure causes death.
+
+Because of the low recall, our model should not be used on its own to make decisions about patient care. At most, it could support clinicians as one extra piece of information, together with their own judgement. A better model could help hospitals decide which patients need closer follow-up and earlier treatment, which matters because treatment that follows clinical guidelines can extend life but takes months to show its full benefit [@cardiacbc].
+
+This work leads to several future questions. Could lowering the classification threshold increase recall without creating too many false alarms? Would other models, such as random forests, perform better? Which clinical measurements contribute most to the model's predictions? And would a model trained on a larger data set, from several hospitals and with patients at different stages of heart failure, perform better and apply more broadly?
 
 # References
 
