@@ -12,6 +12,10 @@ format:
     toc-depth: 2
 ---
 
+# Summary
+
+In this project, we asked whether we can predict if a patient with heart failure will die during the follow-up period from routinely collected clinical measurements. Using the Heart Failure Clinical Records data set of 299 patients with advanced heart failure, we trained a logistic regression model and compared it with a baseline model that always predicts survival. On the held-out test set, our model achieved an accuracy of 73.3%, a recall of 42.1% and an F1-score of 0.50, correctly identifying 8 of the 19 patients who died. Although the model performs better than the baseline, its low recall means it misses most patients who died, so it is not reliable enough to guide clinical decisions on its own. Our results are limited by the small data set, which comes from a single hospital and includes only patients with advanced disease, and by the small number of deaths in the test set. Future work could explore other models and lower classification thresholds to identify more high-risk patients.
+
 # Introduction
 
 ## Background

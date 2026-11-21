@@ -2302,7 +2302,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </nav>
 <section id="summary" class="level1">
 <h1>Summary</h1>
-<p>Write one paragraph summarizing the research question, findings, significance, and limitations.</p>
+<p>In this project, we asked whether we can predict if a patient with heart failure will die during the follow-up period from routinely collected clinical measurements. Using the Heart Failure Clinical Records data set of 299 patients with advanced heart failure, we trained a logistic regression model and compared it with a baseline model that always predicts survival. On the held-out test set, our model achieved an accuracy of 73.3%, a recall of 42.1% and an F1-score of 0.50, correctly identifying 8 of the 19 patients who died. Although the model performs better than the baseline, its low recall means it misses most patients who died, so it is not reliable enough to guide clinical decisions on its own. Our results are limited by the small data set, which comes from a single hospital and includes only patients with advanced disease, and by the small number of deaths in the test set. Future work could explore other models and lower classification thresholds to identify more high-risk patients.</p>
 </section>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
@@ -2326,7 +2326,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <h1>Methods</h1>
 <section id="python-libraries-import" class="level2">
 <h2 class="anchored" data-anchor-id="python-libraries-import">Python Libraries Import</h2>
-<div id="f8fc3926" class="cell" data-execution_count="1">
+<div id="7abc3a04" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -2336,7 +2336,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </section>
 <section id="data-import-and-preparation" class="level2">
 <h2 class="anchored" data-anchor-id="data-import-and-preparation">Data Import and Preparation</h2>
-<div id="846f0cce" class="cell" data-execution_count="2">
+<div id="81ed158f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the dataset URL</span></span>
@@ -2472,7 +2472,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </section>
 <section id="data-inspection" class="level2">
 <h2 class="anchored" data-anchor-id="data-inspection">Data Inspection</h2>
-<div id="72b6c5de" class="cell" data-execution_count="3">
+<div id="5e730e6a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>row_ncol<span class="op">=</span>df.shape</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>col_names<span class="op">=</span>df.columns</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_n_na<span class="op">=</span>df.isna().<span class="bu">sum</span>()</span>
@@ -2687,7 +2687,7 @@ memory usage: 30.5 KB</code></pre>
 </section>
 <section id="inspect-target-variable" class="level2">
 <h2 class="anchored" data-anchor-id="inspect-target-variable">Inspect target Variable</h2>
-<div id="6bd74c91" class="cell" data-execution_count="4">
+<div id="10aa5cdb" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>motaility_percentages<span class="op">=</span>df[<span class="st">&quot;DEATH_EVENT&quot;</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)<span class="op">*</span><span class="dv">100</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(motaility_percentages,<span class="dv">1</span>))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2718,7 +2718,7 @@ Name: proportion, dtype: float64</code></pre>
 </section>
 <section id="data-splitting" class="level2">
 <h2 class="anchored" data-anchor-id="data-splitting">Data Splitting</h2>
-<div id="2d07133d" class="cell" data-execution_count="5">
+<div id="04900e29" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">&quot;DEATH_EVENT&quot;</span>, <span class="st">&quot;time&quot;</span>])</span>
@@ -2745,7 +2745,7 @@ Testing set: (60, 11)</code></pre>
 <section id="saving-processed-data" class="level3">
 <h3 class="anchored" data-anchor-id="saving-processed-data">Saving Processed Data</h3>
 <p>We save the stratified training and test splits separately, with <code>DEATH_EVENT</code> as the outcome and follow-up time excluded. Feature scaling is fitted within the model pipeline during training.</p>
-<div id="16620e13" class="cell" data-execution_count="6">
+<div id="23d74053" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>processed_dir <span class="op">=</span> raw_dir.parent <span class="op">/</span> <span class="st">&quot;processed&quot;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>processed_dir.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2761,7 +2761,7 @@ Testing set: (60, 11)</code></pre>
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis-understanding-the-patients-demographics">Exploratory Data Analysis : Understanding the Patients Demographics</h2>
 <section id="reviewing-outliers-and-reason-for-not-ignoring-them" class="level3">
 <h3 class="anchored" data-anchor-id="reviewing-outliers-and-reason-for-not-ignoring-them">Reviewing Outliers and Reason for Not Ignoring Them</h3>
-<div id="31eb903a" class="cell" data-execution_count="7">
+<div id="ca1d4a6d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot for creatinine phosphokinase (CPK)</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>train_df, x<span class="op">=</span><span class="st">&quot;creatinine_phosphokinase&quot;</span>, color<span class="op">=</span>plot_color)</span>
@@ -2782,7 +2782,7 @@ Testing set: (60, 11)</code></pre>
 </section>
 <section id="boxplot-for-platelets" class="level2">
 <h2 class="anchored" data-anchor-id="boxplot-for-platelets">Boxplot for platelets</h2>
-<div id="bad4293e" class="cell" data-execution_count="8">
+<div id="cb06e26f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>train_df, x<span class="op">=</span><span class="st">&quot;platelets&quot;</span>, color<span class="op">=</span>plot_color)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2801,7 +2801,7 @@ Testing set: (60, 11)</code></pre>
 <p>The two boxplots of creatinine phosphokinase (CPK) and platelet counts revealed extreme values in both variables. These observations were retained in the dataset because they may represent genuine clinical measurements rather than data errors. Removing them without clinical justification could result in the loss of meaningful information. We therefore acknowledge these extreme values and retain them for subsequent analysis.</p>
 <section id="heart-failure-patients-distribution-by-age" class="level3">
 <h3 class="anchored" data-anchor-id="heart-failure-patients-distribution-by-age">Heart Failure Patients Distribution by Age</h3>
-<div id="cdc62339" class="cell" data-execution_count="9">
+<div id="b37c5313" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>train_df, x<span class="op">=</span><span class="st">&quot;age&quot;</span>, bins<span class="op">=</span><span class="dv">15</span>,color<span class="op">=</span>plot_color)</span>
@@ -2824,7 +2824,7 @@ Testing set: (60, 11)</code></pre>
 </section>
 <section id="heart-failure-patients-distribution-by-sex" class="level3">
 <h3 class="anchored" data-anchor-id="heart-failure-patients-distribution-by-sex">Heart Failure Patients distribution by sex</h3>
-<div id="66cc05b2" class="cell" data-execution_count="10">
+<div id="5289a576" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>train_df, x<span class="op">=</span><span class="st">&quot;sex&quot;</span>,color<span class="op">=</span>plot_color)</span>
@@ -2848,7 +2848,7 @@ Testing set: (60, 11)</code></pre>
 </section>
 <section id="mortality-by-age" class="level3">
 <h3 class="anchored" data-anchor-id="mortality-by-age">Mortality by Age</h3>
-<div id="32283537" class="cell" data-execution_count="11">
+<div id="55191185" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>train_df, x<span class="op">=</span><span class="st">&quot;DEATH_EVENT&quot;</span>, y<span class="op">=</span><span class="st">&quot;age&quot;</span>,color<span class="op">=</span>plot_color)</span>
@@ -2870,9 +2870,9 @@ Testing set: (60, 11)</code></pre>
 </div>
 <p>The median age of patients who died was slightly higher (approximately 62 years) than those who survived (60 years), and the patients who died also showed a wider age distribution. This suggests that older age may be associated with mortality in our dataset, although the overlap between the groups indicates that age alone may not distinguish mortality outcomes.</p>
 </section>
-<section id="mortatlity-by-sex" class="level3">
-<h3 class="anchored" data-anchor-id="mortatlity-by-sex">Mortatlity by sex</h3>
-<div id="83d7131a" class="cell" data-execution_count="12">
+<section id="mortality-by-sex" class="level3">
+<h3 class="anchored" data-anchor-id="mortality-by-sex">Mortality by sex</h3>
+<div id="891c9aec" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mortality_by_sex <span class="op">=</span> (</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    train_df.groupby(<span class="st">&quot;sex&quot;</span>)[<span class="st">&quot;DEATH_EVENT&quot;</span>]</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
@@ -2900,7 +2900,7 @@ Testing set: (60, 11)</code></pre>
 </section>
 <section id="mortality-by-the-levels-of-high-blood-pressure" class="level3">
 <h3 class="anchored" data-anchor-id="mortality-by-the-levels-of-high-blood-pressure">Mortality by the levels of High Blood Pressure</h3>
-<div id="7988ed88" class="cell" data-execution_count="13">
+<div id="138029e8" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mortality_by_bp <span class="op">=</span> (</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    train_df.groupby(<span class="st">&quot;high_blood_pressure&quot;</span>)[<span class="st">&quot;DEATH_EVENT&quot;</span>]</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
@@ -2939,7 +2939,7 @@ Testing set: (60, 11)</code></pre>
 <section id="baseline-model" class="level3">
 <h3 class="anchored" data-anchor-id="baseline-model">Baseline Model</h3>
 <p>We first use a Dummy Classifier as a baseline to evaluate whether our classification model performs better than simply predicting the majority class.</p>
-<div id="dc5980d1" class="cell" data-execution_count="14">
+<div id="ca1e72d2" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.dummy <span class="im">import</span> DummyClassifier</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dummy_model <span class="op">=</span> DummyClassifier(strategy<span class="op">=</span><span class="st">&quot;most_frequent&quot;</span>)</span>
@@ -2951,8 +2951,8 @@ Testing set: (60, 11)</code></pre>
 </section>
 <section id="logistic-regression" class="level3">
 <h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
-<p>We use logistic regression to predict mortality outcomes based on clinical measurements. StandardScaler is applied to standardize the features before model training.</p>
-<div id="eb4d214d" class="cell" data-execution_count="15">
+<p>We use logistic regression as a starting point because it is a standard model for predicting binary outcomes, such as mortality, from clinical measurements. We chose a simple model because our training set has only 239 observations, and a more complex model would be more likely to overfit. Finally, StandardScaler is applied to standardize the features before model training.</p>
+<div id="d35ac2f9" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
@@ -2976,7 +2976,7 @@ Testing set: (60, 11)</code></pre>
 <li><strong>Recall</strong> measures the proportion of observed deaths that the model correctly identifies. Low recall means the model misses many patients who died during follow-up.</li>
 <li><strong>F1-score</strong> is the harmonic mean of precision and recall for the death class. It rewards identifying more observed deaths while also accounting for false positives, which reduce precision.</li>
 </ul>
-<div id="7539bf48" class="cell" data-execution_count="16">
+<div id="abbb1a30" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, cross_validate</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3021,7 +3021,7 @@ Logistic Regression     0.749   0.444      0.53</code></pre>
 <section id="final-test-evaluation" class="level3">
 <h3 class="anchored" data-anchor-id="final-test-evaluation">Final Test Evaluation</h3>
 <p>After comparing the models using cross-validation, we evaluate Logistic Regression on the held-out test set.</p>
-<div id="56c89ac4" class="cell" data-execution_count="17">
+<div id="b32e17c3" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, recall_score, f1_score, confusion_matrix</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>test_pred <span class="op">=</span> logistic_model.predict(X_test)</span>

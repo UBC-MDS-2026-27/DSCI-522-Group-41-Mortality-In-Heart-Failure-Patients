@@ -19,11 +19,14 @@ directly linked to the outcome and would leak information about the target.
 A model like this could help clinicians identify the patients at greatest risk
 so they can be prioritized for closer follow-up and treatment.
 
-> **Work in progress:** We are currently exploring the data and building the
-> model. This section will be updated with our high-level findings once the
-> analysis is complete. Because the data come from 299 patients with advanced
-> disease at a single hospital, our results may not generalize to patients with
-> milder heart failure or to other populations.
+We trained a logistic regression model and compared it with a baseline model
+that always predicts survival. On the held-out test set, our model achieved an
+accuracy of 73.3% and a recall of 42.1%, correctly identifying 8 of the 19
+patients who died. Although it performs better than the baseline, it misses
+most patients who died, so it is not reliable enough to guide clinical
+decisions on its own. Because the data come from 299 patients with advanced
+disease at a single hospital, our results may not generalize to patients with
+milder heart failure or to other populations.
 
 ## How to run the analysis
 
