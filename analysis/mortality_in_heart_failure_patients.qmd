@@ -390,6 +390,18 @@ The confusion matrix showed that the model correctly identified 8 of the 19 pati
 These results suggest that clinical measurements provide useful predictive information. However, the relatively low recall indicates that the model has limited ability to identify patients who experienced a death event.
 # Discussion
 
+## Assumptions and limitations
+
+Our logistic regression model assumes that each continuous predictor has a linear relationship with the log-odds of death, with the other predictors held fixed. The model may miss nonlinear relationships and interactions between clinical measurements. We excluded follow-up time from the predictors to avoid leaking outcome information, but the binary outcome still records deaths over varying follow-up periods. The resulting predictions therefore do not estimate mortality at a common time horizon. The dataset contains 299 patients with advanced heart failure from one hospital, and only 19 deaths were observed in the held-out test set. A few different predictions would noticeably change the estimated recall, and performance may differ at other hospitals or among patients with milder disease.
+
+## Potential impact
+
+Logistic regression outperformed the majority-class baseline in cross-validation, suggesting that routinely collected clinical measurements may help identify patients at higher risk of dying during follow-up. On the held-out test set, however, the model identified only 8 of the 19 patients who died, missing 11. These findings support further research into whether such a model could help prioritize follow-up. Its current performance is insufficient to use it on its own for clinical decisions.
+
+## Future questions
+
+How well would the model perform in a larger, independent cohort from other hospitals or among patients with different levels of heart failure severity? Would a lower classification threshold identify more patients who die, and how many additional false alarms would it produce? Future work could compare thresholds using the training data and evaluate the chosen threshold on an independent test set. A time-to-event analysis could also investigate mortality at a fixed time horizon while accounting for differing follow-up periods.
+
 # References
 
 ::: {#refs}
