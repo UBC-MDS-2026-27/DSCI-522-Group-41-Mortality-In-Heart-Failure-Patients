@@ -12,10 +12,6 @@ format:
     toc-depth: 2
 ---
 
-# Summary
-
-Write one paragraph summarizing the research question, findings, significance, and limitations.
-
 # Introduction
 
 ## Background
