@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-As members and contributors of the Predicting Mortality in Heart Failure Patients project, we are committed to creating a respectful, inclusive, collaborative, and welcoming environment for everyone involved in the project.
+As members and contributors of the Predicting Mortality in Heart Failure Patients Classifier project, we are committed to creating a respectful, inclusive, collaborative, and welcoming environment for everyone involved in the project.
 
 We value diversity and recognize that every team member brings unique experiences, perspectives, skills, and ideas. We are committed to ensuring that participation in this project is free from discrimination, harassment, intimidation, and any form of disrespect, regardless of a person's gender, gender identity, sexual orientation, disability, race, ethnicity, age, religion, nationality, educational background, or level of technical experience.
 
@@ -70,7 +70,7 @@ No individual should face retaliation or discrimination for reporting a concern 
 
 ## Scope
 
-This Code of Conduct applies to all project-related activities, including GitHub repositories, pull requests, issues, code reviews, meetings, online discussions, and other spaces where individuals represent or participate in the Student Depression Classifier project.
+This Code of Conduct applies to all project-related activities, including GitHub repositories, pull requests, issues, code reviews, meetings, online discussions, and other spaces where individuals represent or participate in the Predicting Mortality in Heart Failure Patients Classifier project.
 
 All project members and contributors are expected to uphold these principles throughout the project.
 
@@ -84,4 +84,4 @@ By adopting this Code of Conduct, all project members commit to maintaining a co
 
 This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), an established framework for promoting respectful, inclusive, and welcoming communities in collaborative projects.
 
-The original source has been adapted to reflect the academic context and collaborative responsibilities of the DSCI 522 Group 41 Student Depression Classifier project at the University of British Columbia (UBC).
+The original source has been adapted to reflect the academic context and collaborative responsibilities of the DSCI 522 Group 41 Predicting Mortality in Heart Failure Patients Classifier project at the University of British Columbia (UBC).
