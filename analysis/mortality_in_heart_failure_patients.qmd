@@ -162,7 +162,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-# Boxplot for platelets
+## Boxplot for platelets
 ```{python}
 plt.figure(figsize=(7, 4))
 sns.boxplot(data=train_df, x="platelets", color=plot_color)
