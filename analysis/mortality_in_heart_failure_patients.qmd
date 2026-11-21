@@ -86,7 +86,7 @@ print(f"The features/attributes of this dataframe are : {col_names}")
 print(f"The sum of nulls per attributes/features of this dataframe are : {df_n_na}")
 print(f"The number of duplicate rows is: {duplicates}")
 df.info()
-
+df.describe()
 ```
 
 
@@ -131,9 +131,35 @@ print("Testing set:", X_test.shape)
 ```
 
 
-## Understanding the Patients Demographics
+## Exploratory Data Analysis : Understanding the Patients Demographics
 
-## Heart Failure Patients Distribution by Age
+### Reviewing Outliers and Reason for Not Ignoring Them
+
+```{python}
+# Boxplot for creatinine phosphokinase (CPK)
+plt.figure(figsize=(7, 4))
+sns.boxplot(data=train_df, x="creatinine_phosphokinase", color=plot_color)
+
+plt.title("Distribution of Creatinine Phosphokinase (CPK)")
+plt.xlabel("Creatinine Phosphokinase")
+plt.tight_layout()
+plt.show()
+```
+
+# Boxplot for platelets
+```{python}
+plt.figure(figsize=(7, 4))
+sns.boxplot(data=train_df, x="platelets", color=plot_color)
+
+plt.title("Distribution of Platelet Counts")
+plt.xlabel("Platelets")
+plt.tight_layout()
+plt.show()
+```
+
+The two boxplots of creatinine phosphokinase (CPK) and platelet counts revealed extreme values in both variables. These observations were retained in the dataset because they may represent genuine clinical measurements rather than data errors. Removing them without clinical justification could result in the loss of meaningful information. We therefore acknowledge these extreme values and retain them for subsequent analysis.
+
+### Heart Failure Patients Distribution by Age
 ```{python}
 plt.figure(figsize=(7, 4))
 
@@ -149,7 +175,7 @@ plt.show()
 ```
 
 
-## Heart Failure Patients distribution by sex
+### Heart Failure Patients distribution by sex
 ```{python}
 
 plt.figure(figsize=(7, 4))
@@ -166,7 +192,7 @@ plt.show()
 
 ```
 
-## Mortality by Age
+### Mortality by Age
 ```{python}
 plt.figure(figsize=(7, 4))
 
@@ -183,7 +209,7 @@ plt.show()
 ```
 
 
-## Mortatlity by sex
+### Mortatlity by sex
 ```{python}
 mortality_by_sex = (
     train_df.groupby("sex")["DEATH_EVENT"]
@@ -202,7 +228,32 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Exploratory Data Analysis
+### Mortality by the levels of High Blood Pressure
+```{python}
+mortality_by_bp = (
+    train_df.groupby("high_blood_pressure")["DEATH_EVENT"]
+    .mean()
+    .reset_index()
+)
+
+plt.figure(figsize=(7, 4))
+
+sns.barplot(
+    data=mortality_by_bp,
+    x="high_blood_pressure",
+    y="DEATH_EVENT",
+    color=plot_color
+)
+
+plt.title("Mortality Proportion by High Blood Pressure Status")
+plt.xlabel("High Blood Pressure (0 = No, 1 = Yes)")
+plt.ylabel("Proportion Who Died")
+plt.xticks([0, 1], ["No", "Yes"])
+
+plt.tight_layout()
+plt.show()
+
+```
 
 ## Model Development
 

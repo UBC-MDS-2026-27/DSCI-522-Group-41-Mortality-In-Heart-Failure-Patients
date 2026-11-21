@@ -52,7 +52,7 @@ Depending on the nature and severity of the behaviour, the following actions may
 
 Any team member or contributor who experiences or witnesses behaviour that violates this Code of Conduct is encouraged to raise the concern with the project team.
 
-Concerns may be reported privately by emailing the project team at **[INSERT VERIFIED TEAM EMAIL ADDRESS]**. Reports will be treated confidentially and reviewed by the team.
+Concerns may be reported privately by emailing the project team at **lindaart@student.ubc.ca**. Reports will be treated confidentially and reviewed by the team.
 
 The team will make reasonable efforts to address reported concerns through respectful communication and discussion. The confidentiality of individuals involved will be respected to the extent possible.
 
