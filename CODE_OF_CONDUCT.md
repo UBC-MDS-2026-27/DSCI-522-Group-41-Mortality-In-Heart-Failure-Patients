@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-As members and contributors of the Student Depression Classifier project, we are committed to creating a respectful, inclusive, collaborative, and welcoming environment for everyone involved in the project.
+As members and contributors of the Predicting Mortality in Heart Failure Patients project, we are committed to creating a respectful, inclusive, collaborative, and welcoming environment for everyone involved in the project.
 
 We value diversity and recognize that every team member brings unique experiences, perspectives, skills, and ideas. We are committed to ensuring that participation in this project is free from discrimination, harassment, intimidation, and any form of disrespect, regardless of a person's gender, gender identity, sexual orientation, disability, race, ethnicity, age, religion, nationality, educational background, or level of technical experience.
 
