@@ -229,7 +229,7 @@ plt.show()
 
 The median age of patients who died was slightly higher (approximately 62 years) than those who survived (60 years), and the patients who died also showed a wider age distribution. This suggests that older age may be associated with mortality in our dataset, although the overlap between the groups indicates that age alone may not distinguish mortality outcomes.
 
-### Mortatlity by sex
+### Mortality by sex
 ```{python}
 mortality_by_sex = (
     train_df.groupby("sex")["DEATH_EVENT"]
