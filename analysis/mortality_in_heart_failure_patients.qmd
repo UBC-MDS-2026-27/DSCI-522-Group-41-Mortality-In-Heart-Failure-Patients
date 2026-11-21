@@ -107,6 +107,8 @@ plt.show()
 
 ```
 
+Frome the visual above, the training data contains more patients who survived than died during the follow-up period. ~ 68% survived and 32% experienced a death event, indicating an imbalance in the target classes, with survival being the majority class. This is important for model evaluation because accuracy alone may not adequately capture how well the model identifies patients who died.
+
 ## Data Splitting
 ```{python}
 from sklearn.model_selection import train_test_split
@@ -188,6 +190,7 @@ plt.show()
 
 ```
 
+The age distribution shows that patients are predominantly between approximately 50 and 75 years old, with the highest concentration around 60–65 years. The distribution is weighted toward older adults, with relatively few patients above 80, which is consistent with heart failure being more common in older populations.
 
 ### Heart Failure Patients distribution by sex
 ```{python}
@@ -206,6 +209,8 @@ plt.show()
 
 ```
 
+The training data contains more male patients (approximately 158) than female patients (approximately 81), meaning males make up the larger proportion of the dataset. This imbalance in sex representation is important to consider when examining mortality patterns, as differences in outcomes between sexes may partly reflect differences in group sizes.
+
 ### Mortality by Age
 ```{python}
 plt.figure(figsize=(7, 4))
@@ -222,6 +227,7 @@ plt.show()
 
 ```
 
+The median age of patients who died was slightly higher (approximately 62 years) than those who survived (60 years), and the patients who died also showed a wider age distribution. This suggests that older age may be associated with mortality in our dataset, although the overlap between the groups indicates that age alone may not distinguish mortality outcomes.
 
 ### Mortatlity by sex
 ```{python}
@@ -241,6 +247,8 @@ plt.xticks([0, 1], ["Female", "Male"])
 plt.tight_layout()
 plt.show()
 ```
+
+The mortality proportions are very similar between females (approximately 33%) and males (approximately 32%), suggesting that mortality rates do not differ substantially by sex in our training data. Despite males being more numerous in the dataset, the proportion of deaths within each sex is comparable, indicating that sex alone may have limited ability to distinguish mortality outcomes.
 
 ### Mortality by the levels of High Blood Pressure
 ```{python}
@@ -268,6 +276,8 @@ plt.tight_layout()
 plt.show()
 
 ```
+
+Patients with recorded high blood pressure had a higher mortality proportion (approximately 40%) than those without high blood pressure (approximately 28%). Suggesting a potential association between high blood pressure and mortality in our training data, although the difference alone does not establish that high blood pressure causes increased mortality.
 
 ## Model Development
 
