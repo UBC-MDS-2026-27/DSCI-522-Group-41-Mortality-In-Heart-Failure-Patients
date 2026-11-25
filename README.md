@@ -30,96 +30,72 @@ milder heart failure or to other populations.
 
 ## How to run the analysis
 
-These steps work on both macOS and Windows.
+The analysis runs inside a Docker container, so you do not need to install
+Python, uv or Quarto yourself. These steps work on both macOS and Windows.
 
-### 1. Install the tools
+### 1. Install Docker and clone the repository
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and
-[Quarto](https://quarto.org/docs/get-started/). You do not need to install
-Python yourself: uv downloads the version the project uses (Python 3.14, set
-in `.python-version`) when you set up the environment.
-
-The data set is included in `data/raw/`. If it is missing, the report
-downloads it from the UCI Machine Learning Repository the first time it runs.
-
-### 2. Clone the repository and create the environment
+Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) and
+make sure it is running. Then clone this repository and move into its folder:
 
 ```bash
 git clone https://github.com/UBC-MDS-2026-27/DSCI-522-Group-41-Mortality-In-Heart-Failure-Patients.git
 cd DSCI-522-Group-41-Mortality-In-Heart-Failure-Patients
-uv sync
 ```
 
-`uv sync` creates a `.venv` folder inside the project and installs the exact
-package versions pinned in `uv.lock`, including Jupyter, which Quarto needs to
-run the Python code. On macOS, `.venv` is hidden in Finder; press
-**Cmd + Shift + .** to show hidden folders.
+### 2. Create an ssh key
 
-Do not install packages with `pip install` (or with your editor's "install
-package" prompt). With the Python that uv manages, pip fails with an
-"externally managed environment" error, and packages installed that way are
-not recorded for the rest of the team. Use `uv add <package>` instead.
-
-### 3. Select the project environment in your editor
-
-To run code chunks interactively, your editor must use the project
-environment, not your global Python.
-
-**Positron or VS Code**
-
-1. Open the project folder with **File → Open Folder**.
-2. Click the interpreter button in the top-right corner (it may say something
-   like `Python 3.14.7 (Global)`), or open the Command Palette
-   (**Cmd + Shift + P** on macOS, **Ctrl + Shift + P** on Windows) and run
-   **Python: Select Interpreter**.
-3. Choose the environment named
-   `dsci-522-group-41-Mortality-In-Heart-Failure-Patients`.
-4. If it is not listed, choose the option to enter an interpreter path and
-   give the Python inside the project's `.venv` folder:
-   - macOS: `.venv/bin/python`
-   - Windows: `.venv\Scripts\python.exe`
-5. Restart the Python console.
-
-**JupyterLab:** start it from the project folder with `uv run jupyter lab`.
-
-To check that the environment works, run this in the terminal from the
-project folder:
+The container expects an ssh public key at `~/.ssh/id_ed25519.pub`. Check
+whether you already have one by running `ls ~/.ssh/id_ed25519.pub`. If the file
+is not found, create a key with the command below and press Enter at every
+prompt to accept the defaults:
 
 ```bash
-uv run python -c "import pandas; print(pandas.__version__)"
+ssh-keygen -t ed25519
 ```
 
-It should print `3.1.1`. In your editor, the interpreter button should show the
-project environment rather than "Global"; if it still says "Global", the
-project environment is not selected.
+If you skip this step, Docker creates a folder named `id_ed25519.pub` in
+place of the file and the container will not start correctly.
+
+### 3. Download the container image
+
+From the project folder, download the image listed in `docker-compose.yml`:
+
+```bash
+docker compose pull
+```
+
+The image is about 1.5 GB, so the first download can take a few minutes.
 
 ### 4. Render the report
 
 From the project folder, run:
 
 ```bash
-uv run quarto render analysis/mortality_in_heart_failure_patients.qmd
+docker compose run --rm analysis-env uv run quarto render analysis/mortality_in_heart_failure_patients.qmd
 ```
 
-`uv run` runs Quarto inside the project environment, so you do not need to
-activate `.venv` first. The report is saved as a single, self-contained file,
-`analysis/mortality_in_heart_failure_patients.html`.
+This command starts the container, renders the report inside it and saves the
+result to `analysis/mortality_in_heart_failure_patients.html` in your project
+folder.
 
-To preview the report while you work on it in Positron, open
-`analysis/mortality_in_heart_failure_patients.qmd` and either click the
-**Preview** button at the top of the editor, or open the Command Palette
-(**Cmd + Shift + P** on macOS, **Ctrl + Shift + P** on Windows) and run
-**Quarto: Preview** (shortcut **Cmd + Shift + K** / **Ctrl + Shift + K**). The
-preview opens in Positron's Viewer pane and updates each time you save. Select
-the project environment first (step 3), or the code chunks will run with the
-wrong Python.
+### 5. Stopping the container
+
+The `--rm` flag in the command above removes the container as soon as the
+report finishes rendering, so there is nothing left to stop. If you instead
+started the container in the background with `docker compose up -d`, stop it
+with `docker compose down` when you are done.
+
+If you want to change the analysis or work inside the container, see
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Dependencies
 
-The project uses [uv](https://docs.astral.sh/uv/) to manage the Python
-environment and [Quarto](https://quarto.org/) to render the report. All Python
-packages and their versions are listed in [`pyproject.toml`](pyproject.toml)
-and pinned in [`uv.lock`](uv.lock).
+The analysis runs in a Docker image published on
+[Docker Hub](https://hub.docker.com/r/itsluismario/dsci-522-group-41-mortality-in-heart-failure-patients),
+which contains Python, uv, Quarto and every package the project uses. The
+Python packages and their versions are pinned in [`pyproject.toml`](pyproject.toml)
+and [`uv.lock`](uv.lock).
 
 ## Licenses
 
